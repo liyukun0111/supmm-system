@@ -1,23 +1,56 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Login/Login.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/',
+      name: 'index',
+      component: () => import('./views/Index/Index.vue'),
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: () => import('./views/Home/Home.vue')
+        },
+        {
+          path: '/accountmanage',
+          name: 'accountmanage',
+          component: () => import('./views/AccountManage/AccountManage.vue')
+        },
+        {
+          path: '/accountadd',
+          name: 'accountadd',
+          component: () => import('./views/AccountAdd/AccountAdd.vue')
+        },
+        {
+          path: '/passwordmodify',
+          name: 'passwordmodify',
+          component: () => import('./views/PasswordModify/PasswordModify.vue')
+        },
+        {
+          path: '/goodsmanage',
+          name: 'goodsmanage',
+          component: () => import('./views/GoodsManage/GoodsManage.vue')
+        },
+        {
+          path: '/goodsadd',
+          name: 'goodsadd',
+          component: () => import('./views/GoodsAdd/GoodsAdd.vue')
+        },
+        {
+          path: '/salestatistics',
+          name: 'salestatistics',
+          component: () => import('./views/SaleStatistics/SaleStatistics.vue')
+        }
+      ]
     }
   ]
 })
